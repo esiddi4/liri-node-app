@@ -78,6 +78,9 @@ function movieThis() {
 		movieName += process.argv[i] + "+";
 	}
 
+	// If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
+	if (movieName === "") { movieName = "Mr. Nobody"; }
+
 	// Run a request to the OMDB API with the movie specified
 	var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 	
@@ -85,7 +88,6 @@ function movieThis() {
 
 	  // If the request is successful (i.e. if the response status code is 200)
 		if (!error && response.statusCode === 200) {
-
 
 		// Title of the movie.
 		var movieTitle = JSON.parse(body).Title;
@@ -119,7 +121,7 @@ function movieThis() {
 
 // DO WHAT IT SAYS FUNCTION
 function doWhatItSays() {
-
+	
 }
 
 
