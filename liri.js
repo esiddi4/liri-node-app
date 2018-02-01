@@ -73,7 +73,6 @@ function spotifyThisSong() {
 function movieThis() {
 
 	var movieName = "";
-
 	// Use for loop so that movie names longer than one word are included in query
 	for (var i = 3; i < process.argv.length; i++) {
 		movieName += process.argv[i] + "+";
@@ -82,41 +81,38 @@ function movieThis() {
 	// Run a request to the OMDB API with the movie specified
 	var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 	
-
 	request(queryUrl, function(error, response, body) {
 
 	  // If the request is successful (i.e. if the response status code is 200)
-	  if (!error && response.statusCode === 200) {
+		if (!error && response.statusCode === 200) {
 
-	    // Parse the body of the site and recover just the imdbRating
-	    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-	    console.log(body);
-	  }
+
+		// Title of the movie.
+		var movieTitle = JSON.parse(body).Title;
+		console.log("Title: " + movieTitle);
+		// Year the movie came out.
+		var movieYear = JSON.parse(body).Year;
+		console.log("Year: " + movieYear);
+		// IMDB Rating of the movie.
+		var imdbRating = JSON.parse(body).imdbRating;
+		console.log("IMDB Rating: " + imdbRating);
+		// Rotten Tomatoes Rating of the movie.
+		var rottenTomatoes = JSON.parse(body).Ratings[1].Value;
+		console.log("Rotten Tomatoes Rating: " + rottenTomatoes);
+		// Country where the movie was produced.
+		var movieCountry = JSON.parse(body).Country;
+		console.log("Country: " + movieCountry);
+		// Language of the movie.
+		var movieLanguage = JSON.parse(body).Language;
+		console.log("Language: " + movieLanguage);
+		// Plot of the movie.
+		var moviePlot = JSON.parse(body).Plot;
+		console.log("Plot: " + moviePlot);
+		// Actors in the movie.
+		var movieActors = JSON.parse(body).Actors;
+		console.log("Actors: " + movieActors);
+		}
 	});
-
-  // Title of the movie.
-  // var movieTitle = JSON.parse(body).Title;
-
-  // Year the movie came out.
-  // var movieYear = JSON.parse(body).Year;
-
-  // IMDB Rating of the movie.
-  // var imdbRating = JSON.parse(body).imdbRating;
-
-  // Rotten Tomatoes Rating of the movie.
-  // var rottenTomatoes = JSON.parse(body).Ratings[1].Value;
-
-  // Country where the movie was produced.
-  // var movieCountry = JSON.parse(body).Country;
-
-  // Language of the movie.
-  // var movieLanguage = JSON.parse(body).Language;
-
-  // Plot of the movie.
-  // var moviePlot = JSON.parse(body).Plot;
-
-  // Actors in the movie.
-  // var movieActors = JSON.parse(body).Actors;
 
 }
 
